@@ -8,10 +8,22 @@ def fib(n):
     else:
         return fib(n - 1) + fib(n - 2)
 
+def fibmain(n):
+    print(f"Començant fib({n})...")
+    resultat = fib(n)
+    print(f"Acabat fib({n})")
+    return resultat
+
 def main():
     start_time = time.perf_counter()
-    total = sum([fib(35) for _ in range(20)])
+
+    # Cream una llista de 20 elements.
+    # Els seus elements són el resultat de fibmain(35),
+    # que són els valors de fib(35)
+    total = sum([fibmain(35) for _ in range(20)])
+    
     duration = time.perf_counter() - start_time
+
     print(f"Computat en {duration} segons: {total}")
 
 if __name__ == "__main__":

@@ -40,12 +40,15 @@ Temps d'execució en segons:
 
 Nota: Javascript és bastant més ràpid que Python, entre d'altres coses, gràcies al compilador JIT. Es pot desactivar així: `node --jitless script`.
 
+### Conclusió
+
 Com podem veure, fer servir tasques asíncrones, no només no ajuda, sinó que empitjora els resultats.
 
 A les tasques limitades per CPU, ens interessa paral·lelitzar l'execució sempre que puguem. Això implica fer servir threads o processos. Els threads són un poc més lleugers que els processos, i per això tenen resultats un poc millors a Javascript. En el cas de Python, però, els threads no són realment paral·lels, així que només podem fer servir processos si volem execució paral·lela.
 
 ## Cas d'ús limitat per entrada/sortida
 
+Problema: fer 100 peticions HTTP. El servidor necessita uns 100 ms per respondre.
 
 ### Preparació
 
@@ -54,6 +57,8 @@ Hem de preparar un servidor web que respongui les nostres peticions. Això es po
 També haurem d'instal·lar els següents mòduls:
 * Javascript: `sync-fetch` per simular peticions HTTP síncrones.
 * Python: `aiohttp` per fer peticions HTTP asíncrones i `requests` per fer peticions HTTP síncrones.
+
+### Resultats
 
 Temps d'execució en segons:
 
@@ -65,6 +70,8 @@ Temps d'execució en segons:
 | 4. Processos |       2.34 |   1.99 |
 
 Amb Javascript podem fer tasques asíncrones a traves de Promises o a través d'async/await. Hi ha una versió de cada, amb temps d'execució molt similars.
+
+### Conclusió
 
 A les tasques limitades per E/S podem fer servir més fils d'execució paral·lela però, una vegada haguem arribat al límit del nostre sistema, tanmateix estarem esperant perquè algú altre ens doni la resposta.
 Una solució més intel·ligent és fer servir tasques asíncrones: així, en detectar que estam esperant algú altre, passam a la següent tasca sense necessitar paral·lelisme real.

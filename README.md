@@ -74,4 +74,5 @@ Amb Javascript podem fer tasques asíncrones a traves de Promises o a través d'
 ### Conclusió
 
 A les tasques limitades per E/S podem fer servir més fils d'execució paral·lela però, una vegada haguem arribat al límit del nostre sistema, tanmateix estarem esperant perquè algú altre ens doni la resposta.
+
 Una solució més intel·ligent és fer servir tasques asíncrones: així, en detectar que estam esperant algú altre, passam a la següent tasca sense necessitar paral·lelisme real.
